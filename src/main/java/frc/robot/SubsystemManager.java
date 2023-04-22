@@ -5,6 +5,7 @@ import java.util.List;
 
 import frc.lib.loop.ILooper;
 import frc.lib.loop.Loop;
+import frc.lib.loop.Looper;
 import frc.robot.subsystems.Subsystem;
 
 public class SubsystemManager implements ILooper{
@@ -20,10 +21,6 @@ public class SubsystemManager implements ILooper{
         }
 
         return mInstance;
-    }
-
-    public void stop() {
-        mAllSubsystems.forEach(s -> s.stop());   
     }
 
     public List<Subsystem> getSubsystems() {
@@ -78,13 +75,13 @@ public class SubsystemManager implements ILooper{
 
     }
 
-    public void registerEnabledLoops() {
-        register(new EnabledLoop());
-        mAllSubsystems.forEach(s -> s.registerEnabledLoops());
+    public void registerEnabledLoops(Looper looper) {
+        mAllSubsystems.forEach(s -> s.registerEnabledLoops(this));
+        looper.register(new EnabledLoop());
     }
 
-    public void registerDisabledLoops() {
-        register(new DisabledLoop());
+    public void registerDisabledLoops(Looper looper) {
+        looper.register(new DisabledLoop());
     }
 
     @Override

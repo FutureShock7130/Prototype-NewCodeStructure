@@ -9,6 +9,7 @@ import edu.wpi.first.math.util.Units;
 import frc.lib.swerve.SwerveModuleConstants;
 
 public class Constants {
+    public static final double kLooperDt = 0.01;
     
     public static class Swerve {
         public static final double stickDeadband = 0.05;
