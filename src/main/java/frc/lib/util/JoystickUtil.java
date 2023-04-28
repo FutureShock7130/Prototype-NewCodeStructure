@@ -2,9 +2,11 @@ package frc.lib.util;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-// By Neil (hongnai4507@gmail.com)
+/** An utility class for Logitech F310 controller.
+ * 
+ * @author Neil | 6th (hongnai4507@gmail.com)
+ */
 public class JoystickUtil {
-
     Joystick js;
     
     public JoystickUtil(Joystick js) {

@@ -7,7 +7,13 @@ import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-// By Team 254
+/** Ｗpilib預設的Loop frequency只有固定50hz，但透過這個Custom Looper可以讓它達到100hz（似乎是Java的上限）的速度，
+ * 讓PID Controller、Feedforward、trajectory或是其他Loop可以跑得更流暢（50hz -> 100hz，就像是FPS翻倍）。
+ * 
+ * <p>你們可能會想說，奇怪我翻遍整個機器人程式怎麼都找不到Loop，其實Subsystem跟Command裡面的Periodic()，
+ * 是一種重複執行的行為，也就算是一種Loop。
+ * 
+ *  @author Team254 */
 public class Looper implements ILooper{
 
     public final double mPeriod;
