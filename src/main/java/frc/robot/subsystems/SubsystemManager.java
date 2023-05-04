@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.subsystems;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,7 +7,6 @@ import java.util.List;
 import frc.lib.loop.ILooper;
 import frc.lib.loop.Loop;
 import frc.lib.loop.Looper;
-import frc.robot.subsystems.Subsystem;
 
 /**SubsystemManager for custom Subsystems. 
  * 

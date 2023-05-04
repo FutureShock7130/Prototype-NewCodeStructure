@@ -1,4 +1,4 @@
-package frc.robot.manual;
+package frc.robot.manual.impl;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.filter.SlewRateLimiter;
@@ -6,7 +6,8 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.util.LogiJoystick;
 import frc.robot.Constants;
-import frc.robot.subsystems.Swerve;
+import frc.robot.manual.ManualCommand;
+import frc.robot.subsystems.impl.Swerve;
 
 public class TeleopSwerve implements ManualCommand{
 

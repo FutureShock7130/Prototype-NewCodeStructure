@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.robot.subsystems.impl;
 
 import com.ctre.phoenix.sensors.Pigeon2;
 
@@ -18,6 +18,7 @@ import frc.robot.Constants.Swerve.Mod1;
 import frc.robot.Constants.Swerve.Mod2;
 import frc.robot.Constants.Swerve.Mod3;
 import frc.robot.Constants.Swerve.Mod4;
+import frc.robot.subsystems.Subsystem;
 
 public class Swerve extends Subsystem {
 

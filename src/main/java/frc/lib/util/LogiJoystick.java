@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class LogiJoystick {
     Joystick js;
     
+    /** @param port The USB Port that Joystick inputs. You can see it in FRC Driver Station. */
     public LogiJoystick(int port) {
         js = new Joystick(port);
     }

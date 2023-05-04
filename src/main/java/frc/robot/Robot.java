@@ -9,8 +9,9 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.loop.Looper;
 import frc.lib.util.LogiJoystick;
 import frc.robot.manual.CommandHandler;
-import frc.robot.manual.TeleopSwerve;
-import frc.robot.subsystems.Swerve;
+import frc.robot.manual.impl.TeleopSwerve;
+import frc.robot.subsystems.SubsystemManager;
+import frc.robot.subsystems.impl.Swerve;
 
 public class Robot extends TimedRobot {
   private final LogiJoystick mDriverJoystick = new LogiJoystick(0);
