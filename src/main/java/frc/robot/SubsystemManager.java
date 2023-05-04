@@ -1,6 +1,7 @@
 package frc.robot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import frc.lib.loop.ILooper;
@@ -8,6 +9,11 @@ import frc.lib.loop.Loop;
 import frc.lib.loop.Looper;
 import frc.robot.subsystems.Subsystem;
 
+/**SubsystemManager for custom Subsystems. 
+ * 
+ * @author  Team 254
+ * @author  Neil | 6th (hongnai4507@gmail.com)
+*/
 public class SubsystemManager implements ILooper{
     private static SubsystemManager mInstance = null;
 
@@ -27,6 +33,10 @@ public class SubsystemManager implements ILooper{
         return mAllSubsystems;
     }
 
+    public void setSubsystems(Subsystem... subsystems) {
+        mAllSubsystems = Arrays.asList(subsystems);
+    }
+
     public void output2SmartDashboard() {
         mAllSubsystems.forEach(s -> s.outputTelemetry());
     }
@@ -44,9 +54,9 @@ public class SubsystemManager implements ILooper{
 
         @Override
         public void onLoop(double timeStamp) {
-            mAllSubsystems.forEach(s -> s.readPeriodInputs());
+            mAllSubsystems.forEach(s -> s.readPeriodicInputs());
             mLoops.forEach(l -> l.onLoop(timeStamp));
-            mAllSubsystems.forEach(s -> s.writePeriodOutputs());
+            mAllSubsystems.forEach(s -> s.writePeriodicOutputs());
         }
 
         @Override
@@ -65,7 +75,7 @@ public class SubsystemManager implements ILooper{
 
         @Override
         public void onLoop(double timeStamp) {
-            mAllSubsystems.forEach(s -> s.readPeriodInputs());
+            mAllSubsystems.forEach(s -> s.readPeriodicInputs());
         }
 
         @Override

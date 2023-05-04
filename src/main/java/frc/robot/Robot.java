@@ -7,68 +7,71 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.lib.loop.Looper;
+import frc.lib.util.LogiJoystick;
+import frc.robot.manual.CommandHandler;
+import frc.robot.manual.TeleopSwerve;
+import frc.robot.subsystems.Swerve;
 
 public class Robot extends TimedRobot {
+  private final LogiJoystick mDriverJoystick = new LogiJoystick(0);
+
   private final Looper mEnabledLooper = new Looper(Constants.kLooperDt);
   private final Looper mDisabledLooper = new Looper(Constants.kLooperDt);
-
   private final SubsystemManager mSubsystemManager = new SubsystemManager();
+  private final CommandHandler mCommandHandler = new CommandHandler();
 
-  public Robot() {}
+  private final Swerve mSwerve;
+
+  public Robot() {
+    mSwerve = Swerve.getInstance();
+  }
 
   @Override
   public void robotInit() {
-      mSubsystemManager.registerEnabledLoops(mEnabledLooper);
-      mSubsystemManager.registerDisabledLoops(mDisabledLooper);
+    mSubsystemManager.setSubsystems(mSwerve);
+    mCommandHandler.registerCommands(new TeleopSwerve(mSwerve, mDriverJoystick));
+    mSubsystemManager.registerEnabledLoops(mEnabledLooper);
+    mSubsystemManager.registerDisabledLoops(mDisabledLooper);
   }
 
   @Override
   public void robotPeriodic() {
-      CommandScheduler.getInstance().run();
-      mSubsystemManager.output2SmartDashboard();
-      mSubsystemManager.output2Terminal();
+    CommandScheduler.getInstance().run();
+    mSubsystemManager.output2SmartDashboard();
+    mSubsystemManager.output2Terminal();
   }
 
   @Override
   public void disabledInit() {
-      mEnabledLooper.stop();
-      mDisabledLooper.start();
+    mEnabledLooper.stop();
+    mDisabledLooper.start();
   }
 
   @Override
-  public void disabledPeriodic() {}
-
-  @Override
-  public void disabledExit() {}
+  public void disabledPeriodic() {
+    mDisabledLooper.outputTelemetry();
+  }
 
   @Override
   public void autonomousInit() {
-      mDisabledLooper.stop();
-      mEnabledLooper.start();
+    mDisabledLooper.stop();
+    mEnabledLooper.start();
   }
 
   @Override
   public void autonomousPeriodic() {}
 
   @Override
-  public void autonomousExit() {
-      mEnabledLooper.stop();
-      mDisabledLooper.start();
-  }
-
-  @Override
   public void teleopInit() {
-      mDisabledLooper.stop();
-      mEnabledLooper.start();
+    mDisabledLooper.stop();
+    mEnabledLooper.start();
   }
 
   @Override
-  public void teleopPeriodic() {}
-
-  @Override
-  public void teleopExit() {
-      mEnabledLooper.stop();
-      mDisabledLooper.start();
+  public void teleopPeriodic() {
+    mCommandHandler.handleAll();
+    mCommandHandler.outputTelemetry();
+    mEnabledLooper.outputTelemetry();
   }
 
   @Override

@@ -13,10 +13,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * <p>你們可能會想說，奇怪我翻遍整個機器人程式怎麼都找不到Loop，其實Subsystem跟Command裡面的Periodic()，
  * 是一種重複執行的行為，也就算是一種Loop。
  * 
- *  @author Team254 */
+ *  @author Team 254 
+ *  @author Neil | 6th (hongnai4507@gmail.com)*/
 public class Looper implements ILooper{
 
-    public final double mPeriod;
+    private final double mPeriod;
 
     private boolean mRunning;
 
@@ -44,6 +45,10 @@ public class Looper implements ILooper{
         }
     };
 
+    /**
+     * 
+     * @param mPeriod Loop的更新週期，單位為秒(seconds)。
+     */
     public Looper(double mPeriod) {
         this.mPeriod = mPeriod;
         mNotifier = new Notifier(runnable);
@@ -59,6 +64,7 @@ public class Looper implements ILooper{
         }
     }
 
+    /**Start the loops. */
     public synchronized void start() {
         if (!mRunning) {
             System.out.println("Starting loops");
@@ -78,6 +84,7 @@ public class Looper implements ILooper{
         }
     }
 
+    /** Stop the loops. */
     public synchronized void stop() {
         if (mRunning) {
             System.out.println("Stopping loops");
@@ -97,6 +104,7 @@ public class Looper implements ILooper{
 
     }
 
+    /**Output the LooperDT to the SmartDashboard */
     public void outputTelemetry() {
         SmartDashboard.putNumber("Looper DT", mDT);
     }
